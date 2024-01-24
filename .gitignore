@@ -1,0 +1,15 @@
+.vscode
+.DS_Store
+.idea/
+*.iml
+*.tfvars
+node_modules
+*.swp
+*.swo
+*.orig
+*.rej
+/.env
+/.env.local
+certs/
+yarn-error.log
+.tool-versions
