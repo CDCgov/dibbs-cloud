@@ -12,9 +12,4 @@ node_modules
 /.env.local
 certs/
 yarn-error.log
-backend/locust/__pycache__/
-cypress/cypress.env.json
-frontend/src/.env.local
-.run/Backend.run.xml
-.run/Frontend.run.xml
 .tool-versions
