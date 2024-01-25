@@ -1,0 +1,6 @@
+site_name: Cloud Enablement
+dev_addr: '0.0.0.0:80'
+# Copyright
+copyright: "Centers for Disease Control and Prevention | Confidential <!--BuildVersionNumber-->"
+plugins:
+    - search: {}
