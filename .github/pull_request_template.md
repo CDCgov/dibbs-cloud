@@ -26,4 +26,4 @@
 
 ## Cloud
 - [ ] Oncall has been notified if this change is going in after-hours
-- [ ] If there are changes that cannot be tested locally, this has been deployed to our Azure `test`, `dev`, or `pentest` environment for verification
+- [ ] If there are changes that cannot be tested locally, this has been deployed to our Azure `dev` environment for verification.
