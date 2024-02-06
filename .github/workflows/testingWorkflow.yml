@@ -43,4 +43,5 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/actions/build-docs
+      - name: Build Docs Container
+        uses: ./.github/actions/build-docs
