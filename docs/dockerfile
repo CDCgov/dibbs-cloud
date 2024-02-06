@@ -1,0 +1,6 @@
+FROM python:3.9
+COPY ./ce-docs/ /ce-docs/
+WORKDIR /ce-docs/
+RUN pip install mkdocs
+EXPOSE 80
+CMD ["mkdocs", "serve"]

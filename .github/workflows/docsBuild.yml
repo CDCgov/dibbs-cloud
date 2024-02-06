@@ -35,5 +35,5 @@ jobs:
               uses: docker/build-push-action@v5
               with:
                   context: ./docs
-                  file: Dockerfile
+                  file: dockerfile
                   tags: ghcr.io/cdcgov/dibbs-cloud/docs:${{ vars.env.COMMIT_SHORT_SHA }}
