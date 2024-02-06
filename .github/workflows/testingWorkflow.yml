@@ -1,0 +1,47 @@
+name: Testing Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_build:
+        description: "Force build the docker images"
+        required: true
+        default: "true"
+  pull_request:
+    branches:
+      - "**"
+  merge_group:
+    types:
+      - checks_requested
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+# Check for changes in the backend, cypress, database, frontend, and nginx directories
+  workflow_changes:
+    with:
+      what_to_check: ./.github
+    uses: ./.github/workflows/checkForChanges.yml
+
+  docs_changes:
+    with:
+      what_to_check: ./docs
+    uses: ./.github/workflows/checkForChanges.yml
+
+  build_docs_image:
+    if: needs.workflow_changes.outputs.has_changes == 'true' || needs.docs_changes.outputs.has_changes == 'true' || inputs.force_build == 'true' || github.ref == 'refs/heads/main'
+    needs:
+      - docs_changes
+      - workflow_changes
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docs Container
+        uses: ./.github/actions/build-docs

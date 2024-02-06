@@ -1,0 +1,47 @@
+name: Build Docs Container
+run-name: Build Docs Container by @{{github.actor}}
+description: Build and push Docs container image to the registry
+inputs:
+  gh_registry:
+    description: Registry to push the image to
+    required: false
+    default: ghcr.io
+  gh_username:
+    description: Github username
+    required: true
+  gh_token:
+    description: Github token
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+
+    - name: Log in to the GH Container registry
+      uses: docker/login-action@v2
+      with:
+        password: ${{ inputs.gh_token }}
+        registry: ${{ inputs.gh_registry }}
+        username: ${{ inputs.gh_username }}
+
+
+    - name: Set short git commit SHA
+      shell: bash
+      id: vars
+      run: |
+        calculatedSha=$(git rev-parse --short ${{ github.sha }})
+        echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
+ 
+    - name: Confirm git commit SHA output
+      shell: bash
+      run: |
+        echo ${{ env.COMMIT_SHORT_SHA }}   
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./docs
+        file: ./docs/dockerfile
+        push: true
+        tags: ghcr.io/cdcgov/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
