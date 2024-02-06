@@ -24,7 +24,7 @@ jobs:
       id: check_for_changes
       run: |
         echo "::group::Set has_changes output"
-        diff=$(git diff-tree --no-commit-id --name-only -r "origin/master" HEAD -- "${{ inputs.what_to_check }}")
+        diff=$(git diff-tree --no-commit-id --name-only -r "origin/main" HEAD -- "${{ inputs.what_to_check }}")
         echo "Diff: $diff"
         diff_length=$(echo ${#diff})
         has_diff=$([ $diff_length -gt 0 ] && echo "true" || echo "false")
