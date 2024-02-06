@@ -42,4 +42,5 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/workflows/docsBuild.yml
