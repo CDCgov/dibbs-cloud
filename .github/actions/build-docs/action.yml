@@ -15,11 +15,11 @@ runs:
     - name: Confirm git commit SHA output
       shell: bash
       run: |
-        echo ${{ vars.env.COMMIT_SHORT_SHA }}   
+        echo ${{ env.COMMIT_SHORT_SHA }}   
 
     - name: Build Docker Image
       uses: docker/build-push-action@v5
       with:
         context: ./docs
         file: Dockerfile
-        tags: ghcr.io/cdcgov/dibbs-cloud/docs:${{ vars.env.COMMIT_SHORT_SHA }}
+        tags: ghcr.io/cdcgov/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
