@@ -1,18 +1,13 @@
 variable "project" {
-  default = "prime"
+  default = "#{vars.project}"
 }
 
 variable "app_name" {
-  default = "simple-report"
+  default = "#{vars.app_name}"
 }
 
 variable "env" {
-  description = "values: [demo, dev, dev2, dev3, dev4, dev5, dev6, dev7, pentest, test, training, stg, prod]"
-  type        = string
-}
-
-variable "env_level" {
-  description = "Pipeline level that this environment is a member of."
+  description = "values: [dev, prod]"
   type        = string
 }
 
