@@ -15,7 +15,7 @@ resource "azurerm_key_vault" "kv" {
   sku_name = "standard"
 }
 
-resource "azurerm_container_registry" "sr" {
+resource "azurerm_container_registry" "acr" {
   location            = data.azurerm_resource_group.rg.location
   name                = "${team}${project}${env}acr"
   resource_group_name = data.azurerm_resource_group.rg.name
