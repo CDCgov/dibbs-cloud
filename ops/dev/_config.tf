@@ -1,6 +1,6 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "dibbs-ce-dev"
+    resource_group_name  = "dibbs-ce-global"
     storage_account_name = "dibbsglobalstatestorage"
     container_name       = "ce-tfstate"
     key                  = "stg/terraform.tfstate"
@@ -11,7 +11,7 @@ terraform {
       version = "~> 3.93.0"
     }
   }
-  required_version = "~> 1.7.3"
+  required_version = "~> 1.7.4"
 }
 
 provider "azurerm" {

@@ -26,9 +26,3 @@ variable "resource_group_name" {
 variable "network_address" {
   description = "The network address of the virtual network"
 }
-
-
-variable "location" {
-  description = "The location of the resource group to deploy to"
-  type        = string
-}

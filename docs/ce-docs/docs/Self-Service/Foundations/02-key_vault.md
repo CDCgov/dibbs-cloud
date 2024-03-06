@@ -16,3 +16,8 @@ Key Vault templates are located in the `templates/foundations` directory, as par
 Example usage of this module can be found in the `templates/implementation` directory. At a minimum, you will need to implement the following local and module declarations in your environment definition file:
 
 ![Key Vault Usage](../../assets/kv_usage.png)
+
+## Variables
+The following variables are required for this asset. They are already defined in the `_vars.tf` file within the `foundations` directory.
+
+![Foundation Variables](../../assets/foundation_vars.png)
