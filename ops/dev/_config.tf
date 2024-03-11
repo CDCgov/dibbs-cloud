@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "dibbs-ce-global"
     storage_account_name = "dibbsglobalstatestorage"
     container_name       = "ce-tfstate"
-    key                  = "stg/terraform.tfstate"
+    key                  = "dev/terraform.tfstate"
   }
   required_providers {
     azurerm = {

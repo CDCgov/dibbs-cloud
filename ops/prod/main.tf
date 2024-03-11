@@ -1,7 +1,7 @@
 locals {
   team     = "dibbs"
   project  = "ce"
-  env      = "dev"
+  env      = "prod"
   location = "eastus"
 }
 
