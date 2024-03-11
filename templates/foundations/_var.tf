@@ -17,18 +17,3 @@ variable "location" {
   description = "The Azure region in which the associated resources will be created."
   type = string
 }
-
-variable "resource_group_name" {
-  description = "The name of the resource group to deploy to"
-  type        = string
-}
-
-variable "network_address" {
-  description = "The network address of the virtual network"
-}
-
-
-variable "location" {
-  description = "The location of the resource group to deploy to"
-  type        = string
-}

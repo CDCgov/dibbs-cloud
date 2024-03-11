@@ -1,6 +1,6 @@
 # Virtual Networks
 
-Virtual Networks, or VNets, are the foundation of your network in Azure. VNETs allow you to securely connect Azure resources to each other, the internet, and on-premises networks. VNETs are similar to traditional networks, but with additional benefits of Azure's infrastructure.
+Virtual Networks, or VNets, are the foundation of your network in Azure. VNETs allow you to securely connect Azure resources to each other, the internet, and on-premises networks. VNets are similar to traditional networks, but with additional benefits of Azure's infrastructure.
 
 For security and resiliency, VNets are isolated from one another. This isolation prevents traffic from one VNet from directly communicating with another VNet. However, you can connect VNets together by using VNet peering, private endpoints, or other Azure resources.
 

@@ -1,19 +1,19 @@
 locals {
-  subnet_basename = "${var.project}-${var.app_name}-${var.env}"
+  name = "${var.team}-${var.project}-${var.env}"
 }
 
 # Create the virtual network and the persistent subnets
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${var.app_name}-${var.env}-network"
+  name                = "${local.name}-network"
   resource_group_name = var.resource_group_name
   location            = var.location
   address_space       = [var.network_address]
 }
 
 resource "azurerm_subnet" "lbs" {
-  name                 = "${local.subnet_basename}-lb"
+  name                 = "${local.name}-lb"
   resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vn.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [cidrsubnet(var.network_address, 8, 254)] # X.X.254.0/24
   service_endpoints = [
     "Microsoft.Web",
@@ -24,7 +24,7 @@ resource "azurerm_subnet" "lbs" {
 /*
 # Subnet for App Service Plans
 resource "azurerm_subnet" "webapp" {
-  name                 = "${local.subnet_basename}-webapp"
+  name                 = "${local.name}-webapp"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vn.name
   address_prefixes     = [cidrsubnet(var.network_address, 8, 100)] # X.X.100.0/24
