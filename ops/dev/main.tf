@@ -14,11 +14,11 @@ module "foundations" {
 }
 
 module "virtual_network" {
-  source              = "../resources/virtual_network"
-  team                = local.team
-  project             = local.project
-  env                 = local.env
-  location            = local.location
-  resource_group_name = module.foundations.resource_group_name
-  network_address     = "10.30.0.0/16"
+  source                = "../resources/virtual_network"
+  team                  = local.team
+  project               = local.project
+  env                   = local.env
+  location              = local.location
+  resource_group_name   = module.foundations.resource_group_name
+  network_address_space = "10.30.0.0/16"
 }
