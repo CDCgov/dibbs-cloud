@@ -67,7 +67,7 @@ resource "azurerm_application_gateway" "k8s" {
     http_listener_name         = local.listener_name
     backend_address_pool_name  = local.backend_address_pool_name
     backend_http_settings_name = local.http_setting_name
-    priority = 10
+    priority                   = 10
   }
 
   depends_on = [
@@ -77,9 +77,9 @@ resource "azurerm_application_gateway" "k8s" {
 }
 
 resource "azurerm_public_ip" "k8s_ingress" {
-  name                         = "${local.name}-k8s-gateway-ip"
-  location                     = data.azurerm_resource_group.rg.location
-  resource_group_name          = data.azurerm_resource_group.rg.name
-  allocation_method            = "Static"
-  sku                          = "Standard"
+  name                = "${local.name}-k8s-gateway-ip"
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
 }
