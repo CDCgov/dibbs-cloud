@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TERRAFORM_DIRS: |
-          dev dev/persistent stg stg/persistent prod prod/persistent
+          dev stg prod
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3.0.0
