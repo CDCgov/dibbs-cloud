@@ -27,3 +27,7 @@ variable "username" {
   description = "The admin username for the new cluster."
   default     = "azureadmin"
 }
+
+variable "azurerm_storage_account" {
+    description = "Azure Storage Account"
+}

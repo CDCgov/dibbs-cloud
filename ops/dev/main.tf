@@ -22,3 +22,11 @@ module "virtual_network" {
   resource_group_name = module.foundations.resource_group_name
   network_address     = "10.30.0.0/16"
 }
+
+module "aks" {
+  source   = "../resources/modules/aks"
+  team     = local.team
+  project  = local.project
+  env      = local.env
+  location = local.location
+}
