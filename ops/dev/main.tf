@@ -25,6 +25,7 @@ module "virtual_network" {
 
 module "aks" {
   source   = "../resources/aks"
+  resource_group_name = module.foundations.resource_group_name
   team     = local.team
   project  = local.project
   env      = local.env
