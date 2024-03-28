@@ -42,5 +42,5 @@ output "kube_config" {
 }
 
 output "key_data" {
-  value = jsondecode(azapi_resource_action.ssh_public_key_gen.output).publicKey
+  value = jsondecode(azurerm_ssh_public_key.ssh_public_key_gen.output).publicKey
 }

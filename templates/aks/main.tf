@@ -1,4 +1,3 @@
-
 resource "azurerm_kubernetes_cluster" "k8s" {
   location            = var.resource_group_location
   name                = "test-cluster"
@@ -18,11 +17,18 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     admin_username = var.username
 
     ssh_key {
-      key_data = jsondecode(azapi_resource_action.ssh_public_key_gen.output).publicKey
+      key_data = jsondecode(azurerm_ssh_public_key.ssh_public_key_gen.output).publicKey
     }
   }
   network_profile {
     network_plugin    = "kubenet"
     load_balancer_sku = "standard"
   }
+}
+
+resource "azurerm_ssh_public_key" "ssh_public_key_gen" {
+  name                = var.name
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  public_key          = var.public_key
 }

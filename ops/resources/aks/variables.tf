@@ -15,12 +15,6 @@ variable "node_count" {
   default     = 3
 }
 
-variable "msi_id" {
-  type        = string
-  description = "The Managed Service Identity ID. Set this value if you're running this example using Managed Identity as the authentication method."
-  default     = null
-}
-
 variable "username" {
   type        = string
   description = "The admin username for the new cluster."
@@ -44,5 +38,10 @@ variable "env" {
 
 variable "location" {
   description = "The Azure region in which the associated resources will be created."
+  type        = string
+}
+
+variable "public_key" {
+  description = "The Azure ssh public key."
   type        = string
 }
