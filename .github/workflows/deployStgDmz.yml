@@ -1,0 +1,40 @@
+name: Deploy Stg-DMZ
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DEPLOY_ENV: stg-dmz
+
+concurrency:
+  group: stg-deploy
+  cancel-in-progress: false
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and Push docs container
+        uses: ./.github/actions/build-and-push-docs
+        with:
+          acr_registry: ${{ secrets.ACR_REPO_URL }}
+          acr_username: ${{ secrets.ACR_ADMIN_USERNAME }}
+          acr_password: ${{ secrets.ACR_ADMIN_PASWORD }}
+
+  deploy_infra:
+    runs-on: ubuntu-latest
+    needs: [build_docs]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/tf-deploy
+        name: Deploy with Terraform
+        with:
+          azure_creds: ${{ secrets.AZURE_CREDENTIALS }}
+          deploy_env: ${{ env.deploy_env }}
+          terraform_arm_client_id: ${{ secrets.TERRAFORM_ARM_CLIENT_ID }}
+          terraform_arm_client_secret: ${{ secrets.TERRAFORM_ARM_CLIENT_SECRET }}
+          terraform_arm_subscription_id: ${{ secrets.TERRAFORM_ARM_SUBSCRIPTION_ID }}
+          terraform_arm_tenant_id: ${{ secrets.TERRAFORM_ARM_TENANT_ID }}
