@@ -2,7 +2,7 @@ name: Deploy Prod-DMZ
 
 on:
   workflow_run:
-    workflows: [ "Deploy Prod-DMZ" ]
+    workflows: [ "Deploy Stg" ]
     types:
       - completed
 
