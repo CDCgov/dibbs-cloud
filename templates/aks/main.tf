@@ -17,9 +17,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   linux_profile {
     admin_username = var.username
 
-    ssh_key {
-      key_data = jsondecode(azapi_resource_action.ssh_public_key_gen.output).publicKey
-    }
   }
   network_profile {
     network_plugin    = "kubenet"
