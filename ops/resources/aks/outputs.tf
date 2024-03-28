@@ -39,3 +39,4 @@ output "kube_config" {
 
 output "key_data" {
   value = ""
+}
