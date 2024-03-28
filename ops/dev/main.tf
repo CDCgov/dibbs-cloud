@@ -30,5 +30,4 @@ module "aks" {
   project             = local.project
   env                 = local.env
   location            = local.location
-  public_key          = module.foundations.azurerm_ssh_public_key.publicKey.public_key
 }
