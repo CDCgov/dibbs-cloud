@@ -26,7 +26,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - uses: hashicorp/setup-terraform@v3.0.0
         with:
-          terraform_version: 1.7.3
+          terraform_version: 1.7.4
       - name: Terraform Init
         run: make init-${{ github.event.inputs.env }}
       - name: Terraform plan
