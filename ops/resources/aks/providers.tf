@@ -1,5 +1,15 @@
+terraform {
+  required_providers {
+    azapi = {
+      source  = "azure/azapi"
+      version = "= 1.12.1"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
+  
 
   #TODO: Ask the team if we should mask these in vault for the templates or just as a github variable.
   # Vault may add an additional level of security
