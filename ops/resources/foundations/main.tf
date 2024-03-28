@@ -35,3 +35,10 @@ resource "azurerm_storage_account" "app" {
   allow_nested_items_to_be_public  = false
   cross_tenant_replication_enabled = false
 }
+
+resource "azurerm_ssh_public_key" "publicKey" {
+  name                = "${var.name}"
+  resource_group_name = "${var.resource_group_name}"
+  location            = "${var.location}"
+  public_key          = file("~/.ssh/id_rsa_azure.pub")
+}
