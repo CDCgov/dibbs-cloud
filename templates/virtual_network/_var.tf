@@ -23,12 +23,38 @@ variable "resource_group_name" {
   type        = string
 }
 
-variable "network_address" {
-  description = "The network address of the virtual network"
+variable "network_address_space" {
+  description = "The desired address space for the full virtual network"
+  type = string
+  default = "10.30.0.0/16"
 }
 
-
-variable "location" {
-  description = "The location of the resource group to deploy to"
+variable "k8s_subnet_address_prefix" {
   type        = string
+  description = "IP address space for kubernetes subnet vnet"
+  default     = "10.30.1.0/24"
+}
+
+variable "app_gateway_subnet_address_prefix" {
+  type        = string
+  description = "App gateway subnet server IP address space."
+  default     = "10.30.5.0/24"
+}
+
+variable "lb_subnet_address_prefix" {
+  type        = string
+  description = "Load balancer subnet IP address space."
+  default     = "10.30.7.0/24"
+}
+
+variable "app_gateway_sku" {
+  type        = string
+  description = "Name of the Application Gateway SKU"
+  default     = "Standard_v2"
+}
+
+variable "app_gateway_tier" {
+  type        = string
+  description = "Tier of the Application Gateway tier"
+  default     = "Standard_v2"
 }

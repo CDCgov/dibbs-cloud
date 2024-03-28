@@ -8,25 +8,26 @@ on:
         required: true
         default: "prod" 
 
+env:
+  ARM_CLIENT_ID: ${{ secrets.TERRAFORM_ARM_CLIENT_ID }}
+  ARM_CLIENT_SECRET: ${{ secrets.TERRAFORM_ARM_CLIENT_SECRET }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.TERRAFORM_ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.TERRAFORM_ARM_TENANT_ID }}
+
 jobs:
   terraform-plan:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./ops
-    env: # all Azure interaction is through Terraform
-      ARM_CLIENT_ID: ${{ secrets.TERRAFORM_ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.TERRAFORM_ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.TERRAFORM_ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.TERRAFORM_ARM_TENANT_ID }}
     steps:
       - uses: actions/checkout@v4
-      - uses: azure/login@v1
+      - uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
       - uses: hashicorp/setup-terraform@v3.0.0
         with:
-          terraform_version: 1.7.3
+          terraform_version: 1.7.4
       - name: Terraform Init
         run: make init-${{ github.event.inputs.env }}
       - name: Terraform plan
