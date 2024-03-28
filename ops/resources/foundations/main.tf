@@ -40,5 +40,5 @@ resource "azurerm_ssh_public_key" "publicKey" {
   name                = "${var.team}"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  public_key          = azurerm_ssh_public_key.publicKey.public_key
+  public_key          = file("~/.ssh/id_rsa_azure.pub")
 }
