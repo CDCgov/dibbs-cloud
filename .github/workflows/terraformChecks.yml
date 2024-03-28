@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v2.0.3
         with:
-          terraform_version: 1.7.3
+          terraform_version: 1.7.4
       - name: Terraform fmt
         run: terraform fmt -check -recursive
 
@@ -28,12 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TERRAFORM_DIRS: |
-          dev dev/persistent stg stg/persistent prod prod/persistent
+          dev stg prod
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3.0.0
         with:
-          terraform_version: 1.7.3
+          terraform_version: 1.7.4
       - name: Terraform Init
         run: |
           for d in $TERRAFORM_DIRS
@@ -70,7 +70,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v3.0.0
         if: ${{ github.actor != 'dependabot[bot]' }}
         with:
-          terraform_version: 1.7.3
+          terraform_version: 1.7.4
       - name: Terraform Init Prod
         if: ${{ github.actor != 'dependabot[bot]' }}
         run: make init-prod
