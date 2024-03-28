@@ -17,8 +17,3 @@ variable "location" {
   description = "The Azure region in which the associated resources will be created."
   type        = string
 }
-
-variable "public_key" {
-  description = "The Azure ssh public key."
-  type        = string
-}
