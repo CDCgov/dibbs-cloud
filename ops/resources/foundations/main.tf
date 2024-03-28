@@ -37,8 +37,8 @@ resource "azurerm_storage_account" "app" {
 }
 
 resource "azurerm_ssh_public_key" "publicKey" {
-  name                = "${var.name}"
-  resource_group_name = "${var.resource_group_name}"
-  location            = "${var.location}"
+  name                = var.name
+  resource_group_name = var.resource_group_name
+  location            = var.location
   public_key          = file("~/.ssh/id_rsa_azure.pub")
 }
