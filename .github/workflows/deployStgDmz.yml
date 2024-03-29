@@ -1,16 +1,15 @@
-name: Deploy Prod
+name: Deploy Stg-DMZ
 
 on:
-  workflow_run:
-    workflows: [ "Deploy Stg" ]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 env:
-  DEPLOY_ENV: prod
+  DEPLOY_ENV: stg-dmz
 
 concurrency:
-  group: prod-deploy
+  group: stg-deploy
   cancel-in-progress: false
 
 jobs:

@@ -7,8 +7,6 @@ locals {
   request_routing_rule_name      = "${azurerm_virtual_network.vnet.name}-rqrt"
 
   #networkContributorRole         = "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]"
-
-  app_gateway_subnet_name = "appgwsubnet"
 }
 
 resource "azurerm_application_gateway" "k8s" {
