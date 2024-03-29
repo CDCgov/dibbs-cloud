@@ -28,6 +28,6 @@ jobs:
         echo "Diff: $diff"
         diff_length=$(echo ${#diff})
         has_diff=$([ $diff_length -gt 0 ] && echo "true" || echo "false")
-        echo "The Changes: ${has_diff}"
+        echo "Has changes: ${has_diff}"
         echo "has_changes=${has_diff}" >> "$GITHUB_OUTPUT"
         echo "::endgroup::"

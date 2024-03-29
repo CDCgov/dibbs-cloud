@@ -9,4 +9,5 @@ _Coming soon!_
 
 | Component Class | Documentation Link |
 | --- | --- |
+| Foundations | [Foundations](./Foundations/00-contents.md) |
 | Networking | [Networking](./Networking/00-contents.md) |
