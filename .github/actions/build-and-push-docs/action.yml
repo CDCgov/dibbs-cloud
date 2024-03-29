@@ -18,7 +18,7 @@ runs:
     - uses: actions/checkout@v4
 
     - name: Log in to the GH Container registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3.1.0
       with:
         password: ${{ inputs.acr_password }}
         registry: ${{ inputs.acr_registry }}

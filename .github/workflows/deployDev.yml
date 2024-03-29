@@ -25,8 +25,8 @@ jobs:
         uses: ./.github/actions/build-and-push-docs
         with:
           acr_registry: ${{ secrets.ACR_REPO_URL }}
-          acr_username: ${{ secrets.TERRAFORM_ARM_CLIENT_ID }}
-          acr_password: ${{ secrets.TERRAFORM_ARM_CLIENT_SECRET }}
+          acr_username: ${{ secrets.ACR_ADMIN_USERNAME }}
+          acr_password: ${{ secrets.ACR_ADMIN_PASSWORD }}
 
   deploy_infra:
     runs-on: ubuntu-latest
