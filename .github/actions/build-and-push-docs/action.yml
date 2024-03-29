@@ -44,5 +44,5 @@ runs:
         file: ./docs/dockerfile
         push: true
         tags: |
-          dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
-          dibbs-cloud/docs:latest
+          ${{ inputs.acr_registry }}/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
+          ${{ inputs.acr_registry }}/dibbs-cloud/docs:latest
