@@ -43,4 +43,6 @@ runs:
         context: ./docs
         file: ./docs/dockerfile
         push: true
-        tags: [dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}, dibbs-cloud/docs:latest]
+        tags: |
+          dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
+          dibbs-cloud/docs:latest
