@@ -13,7 +13,7 @@ CURL_TIMEOUT?=20
 
 # Internal target: check if the passed-in wildcard is a known environment name. Hard-coding them because let's be real here.
 .valid-env-%:
-	@case $* in dev|stg|prod) ;; *) echo "$* is not a valid environment"; exit 1;; esac
+	@case $* in dev|dev-dmz|stg|stg-dmz|prod|prod-dmz) ;; *) echo "$* is not a valid environment"; exit 1;; esac
 
 api.tfvars: /dev/null
 	echo "acr_image_tag=\"$(DEPLOYED_COMMIT)\"" > $@; \
@@ -26,13 +26,10 @@ api.tfvars: /dev/null
 	echo "deploy_actor=\"$(GITHUB_ACTOR)\"" >> $@;
 
 init-%: .valid-env-%
-	terraform -chdir=$*/persistent init
 	terraform -chdir=$* init
 
 plan-%: .valid-env-% api.tfvars
-	terraform -chdir=$*/persistent plan -lock-timeout=30m
 	terraform -chdir=$* plan -var-file=../api.tfvars -lock-timeout=30m
 
 deploy-%: .valid-env-% api.tfvars
-	terraform -chdir=$*/persistent apply -auto-approve -lock-timeout=30m
 	terraform -chdir=$* apply -auto-approve -var-file=../api.tfvars -lock-timeout=30m
