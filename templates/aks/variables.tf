@@ -45,3 +45,15 @@ variable "public_key" {
   description = "The Azure ssh public key."
   type        = string
 }
+
+variable "aks_service_cidr" {
+  type        = string
+  description = "CIDR notation IP range from which to assign service cluster IPs"
+  default     = "10.0.0.0/16"
+}
+
+variable "aks_dns_service_ip" {
+  type        = string
+  description = "DNS server IP address"
+  default     = "10.0.0.10"
+}
