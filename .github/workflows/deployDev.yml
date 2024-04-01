@@ -11,7 +11,6 @@ on:
         options:
           - ""
           - dev
-          - dev-dmz
 
 concurrency:
   group: ${{ github.event.inputs.deploy_env }}-deploy
@@ -27,7 +26,7 @@ jobs:
         with:
           acr_registry: ${{ secrets.ACR_REPO_URL }}
           acr_username: ${{ secrets.ACR_ADMIN_USERNAME }}
-          acr_password: ${{ secrets.ACR_ADMIN_PASWORD }}
+          acr_password: ${{ secrets.ACR_ADMIN_PASSWORD }}
 
   deploy_infra:
     runs-on: ubuntu-latest

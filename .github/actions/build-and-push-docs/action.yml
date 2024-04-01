@@ -2,15 +2,14 @@ name: Build Docs Container
 run-name: Build Docs Container by @{{github.actor}}
 description: Build and push Docs container image to the registry
 inputs:
-  gh_registry:
-    description: Registry to push the image to
-    required: false
-    default: ghcr.io
-  gh_username:
-    description: Github username
+  acr_registry:
+    description: Azure Container Registry to push the image to
     required: true
-  gh_token:
-    description: Github token
+  acr_username:
+    description: Azure Container Registry username
+    required: true
+  acr_password:
+    description: Azure Container Registry password
     required: true
 
 runs:
@@ -19,11 +18,11 @@ runs:
     - uses: actions/checkout@v4
 
     - name: Log in to the GH Container registry
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3.1.0
       with:
-        password: ${{ inputs.gh_token }}
-        registry: ${{ inputs.gh_registry }}
-        username: ${{ inputs.gh_username }}
+        password: ${{ inputs.acr_password }}
+        registry: ${{ inputs.acr_registry }}
+        username: ${{ inputs.acr_username }}
 
 
     - name: Set short git commit SHA
@@ -44,4 +43,6 @@ runs:
         context: ./docs
         file: ./docs/dockerfile
         push: true
-        tags: ghcr.io/cdcgov/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
+        tags: |
+          ${{ inputs.acr_registry }}/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
+          ${{ inputs.acr_registry }}/dibbs-cloud/docs:latest
