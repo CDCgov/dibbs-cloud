@@ -15,6 +15,8 @@ resource "azurerm_key_vault" "kv" {
 
   sku_name = "standard"
 
+  # Without an network ACL the key vault is freely accesible
+  # See https://aquasecurity.github.io/tfsec/v1.0.7/checks/azure/keyvault/specify-network-acl/
   network_acls {
     bypass         = "AzureServices"
     default_action = "Deny"

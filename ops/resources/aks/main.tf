@@ -8,6 +8,9 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     "10.30.0.0/16"
   ]
 
+  # RBAC enabled (default is disabled when missing)
+  local_account_disabled = true
+
   identity {
     type = "SystemAssigned"
   }
@@ -25,8 +28,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     }
   }
   network_profile {
-    network_plugin    = "kubenet"
+    network_plugin    = "azure"
+    dns_service_ip    = var.aks_dns_service_ip
     load_balancer_sku = "standard"
+    service_dir       = var.aks_service_cidr
   }
 }
 
