@@ -4,6 +4,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = var.resource_group_name
   dns_prefix          = "dns"
 
+  api_server_authorized_ip_ranges = [
+    "10.30.0.0/16"
+  ]
+
+  # RBAC enabled (default is disabled when missing)
+  local_account_disabled = true
+
   identity {
     type = "SystemAssigned"
   }
@@ -43,4 +50,11 @@ resource "azapi_resource" "ssh_public_key" {
   name      = "phdi-playground-${terraform.workspace}-ssh-key"
   location  = var.location
   parent_id = data.azurerm_resource_group.rg.id
+}
+
+resource "azurerm_log_analytics_workspace" "az_logs" {
+  name                = "az_logs-${var.env}-workspace"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku                 = "PerGB2018"
 }
