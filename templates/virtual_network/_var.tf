@@ -25,8 +25,8 @@ variable "resource_group_name" {
 
 variable "network_address_space" {
   description = "The desired address space for the full virtual network"
-  type = string
-  default = "10.30.0.0/16"
+  type        = string
+  default     = "10.30.0.0/16"
 }
 
 variable "k8s_subnet_address_prefix" {
