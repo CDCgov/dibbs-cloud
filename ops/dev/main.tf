@@ -30,5 +30,4 @@ module "aks" {
   env                   = local.env
   location              = local.location
   resource_group_name   = module.foundations.resource_group_name
-  network_address_space = "10.30.0.0/16"
 }
