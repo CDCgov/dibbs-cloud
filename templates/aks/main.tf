@@ -5,7 +5,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   dns_prefix          = "dns"
 
   # RBAC enabled (default is disabled when missing)
-  local_account_disabled = true
+  local_account_disabled = false
 
   identity {
     type = "SystemAssigned"
