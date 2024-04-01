@@ -21,6 +21,11 @@ variable "username" {
   default     = "azureadmin"
 }
 
+variable "env" {
+  description = "One-word identifier for the target environment (e.g. dev, test, prod)."
+  type        = string
+}
+
 variable "team" {
   description = "One-word identifier for this project's custodial team."
   type        = string
