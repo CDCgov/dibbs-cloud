@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   api_server_authorized_ip_ranges = [
-        "10.30.0.0/16"
+    "10.30.0.0/16"
   ]
 
   # RBAC enabled (default is false when missing)
