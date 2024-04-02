@@ -4,8 +4,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = var.resource_group_name
   dns_prefix          = "dns"
 
-  # RBAC enabled (default is disabled when missing)
-  local_account_disabled = false
+  # RBAC enabled (default is false when missing)
+  azure_active_directory_role_based_access_control {
+    managed = true
+    #admin_group_object_ids =
+    azure_rbac_enabled = true
+  }
 
   identity {
     type = "SystemAssigned"
