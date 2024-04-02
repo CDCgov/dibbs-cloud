@@ -3,9 +3,30 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
-#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-04-01
+resource "azurerm_app_service" "webapp" {
+  name                = "webapp-${var.name}"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  client_cert_enabled = true
+
+  site_config {
+    always_on                = true
+    dotnet_framework_version = "v4.0"
+    http2_enabled            = true
+  }
+
+  auth_settings {
+    enabled = true
+  }
+
+  identity {
+    type         = "UserAssigned"
+    identity_ids = "dibbs-webapp"
+  }
+}
+
 resource "azurerm_key_vault" "kv" {
-  name                        = "${var.team}${var.project}${var.env}kv"
+  name                        = "${var.name}-${var.env}-kv"
   location                    = var.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
@@ -14,6 +35,12 @@ resource "azurerm_key_vault" "kv" {
   purge_protection_enabled    = true
 
   sku_name = "standard"
+
+  network_acls {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+    ip_rules       = []
+  }
 }
 
 resource "azurerm_container_registry" "acr" {
