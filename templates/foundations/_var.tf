@@ -27,3 +27,21 @@ variable "resource_group_location" {
   default     = "eastus"
   description = "Location of the resource group."
 }
+
+variable "node_count" {
+  type        = number
+  description = "The number of agent nodes for the cluster."
+  default     = 1
+}
+
+variable "username" {
+  type        = string
+  description = "User name for the VM"
+  default     = "aks_user"
+}
+
+variable "aks_dns_service_ip" {
+  type        = string
+  description = "DNS server IP address"
+  default     = "10.0.0.10"
+}
