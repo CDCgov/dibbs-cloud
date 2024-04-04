@@ -6,11 +6,11 @@ locals {
 }
 
 module "foundations" {
-  source   = "../resources/foundations"
-  team     = local.team
-  project  = local.project
-  env      = local.env
-  location = local.location
+  source              = "../resources/foundations"
+  team                = local.team
+  project             = local.project
+  env                 = local.env
+  location            = local.location
   resource_group_name = var.resource_group_name
 }
 
