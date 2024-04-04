@@ -100,7 +100,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     network_plugin    = "azure"
     dns_service_ip    = var.aks_dns_service_ip
     load_balancer_sku = "standard"
-    service_cdir       = var.aks_service_cidr
+    service_cdir      = var.aks_service_cidr
   }
 }
 
