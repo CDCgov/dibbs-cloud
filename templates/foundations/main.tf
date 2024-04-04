@@ -17,7 +17,7 @@ resource "azurerm_service_plan" "appserviceplan" {
 resource "azurerm_linux_web_app" "webapp" {
   name                = "webapp-service-${terraform.workspace}-${var.team}"
   resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_service_plan.rg.location
+  location            = azurerm_service_plan.appserviceplan.location
   service_plan_id     = azurerm_service_plan.appserviceplan.id
 
   site_config {}
