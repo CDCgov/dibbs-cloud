@@ -3,26 +3,24 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
-resource "azurerm_app_service" "webapp" {
+# Azure Web App Service
+
+# Create the Linux App Service Plan
+resource "azurerm_service_plan" "appserviceplan" {
+  name                = "appserviceplan-${terraform.workspace}-${var.team}"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
+
+resource "azurerm_linux_web_app" "webapp" {
   name                = "webapp-service-${terraform.workspace}-${var.team}"
-  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  client_cert_enabled = true
+  location            = azurerm_service_plan.rg.location
+  service_plan_id     = azurerm_service_plan.appserviceplan.id
 
-  site_config {
-    always_on                = true
-    dotnet_framework_version = "v4.0"
-    http2_enabled            = true
-  }
-
-  auth_settings {
-    enabled = true
-  }
-
-  identity {
-    type         = "UserAssigned"
-    identity_ids = "dibbs-webapp"
-  }
+  site_config {}
 }
 
 resource "azurerm_key_vault" "kv" {
