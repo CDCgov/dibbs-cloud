@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_app_service" "webapp" {
-  name                = "webapp-${var.name}"
+  name                = "webapp-service-${terraform.workspace}-${var.team}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   client_cert_enabled = true
@@ -26,7 +26,7 @@ resource "azurerm_app_service" "webapp" {
 }
 
 resource "azurerm_key_vault" "kv" {
-  name                        = "${var.name}-${var.env}-kv"
+  name                        = "${var.team}-${var.env}-kv"
   location                    = var.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true
