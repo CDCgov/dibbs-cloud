@@ -68,9 +68,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = var.resource_group_name
   dns_prefix          = "dns"
 
-  oms_agent {
-    enabled = true
+  addon_profile{
+    oms_agent {
+      enabled = true
+      
+    }
   }
+  
 
   api_server_authorized_ip_ranges = [
     "10.30.0.0/16"
@@ -104,7 +108,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     network_plugin    = "azure"
     dns_service_ip    = var.aks_dns_service_ip
     load_balancer_sku = "standard"
-    service_cdir      = var.aks_service_cidr
+    service_cidr      = var.aks_service_cidr
   }
 }
 
