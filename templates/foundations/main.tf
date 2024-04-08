@@ -68,13 +68,13 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = var.resource_group_name
   dns_prefix          = "dns"
 
-  addon_profile{
+  addon_profile {
     oms_agent {
       enabled = true
-      
+
     }
   }
-  
+
 
   api_server_authorized_ip_ranges = [
     "10.30.0.0/16"
