@@ -57,12 +57,3 @@ resource "azurerm_app_service_virtual_network_swift_connection" "app" {
   app_service_id = azurerm_linux_web_app.octopus.id
   subnet_id      = var.webapp_subnet_id
 }
-/*
-resource "azurerm_mssql_firewall_rule" "example" {
-  for_each = toset(azurerm_linux_web_app.octopus.outbound_ip_address_list)
-  count = azurerm_linux_web_app.octopus.outbound_ip_address_list.count
-    name             = "AllowAppService"
-    server_id        = var.database_server_id
-    start_ip_address = each.value
-    end_ip_address   = each.value
-}*/

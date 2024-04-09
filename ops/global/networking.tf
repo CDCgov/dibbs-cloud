@@ -24,7 +24,7 @@ resource "azurerm_subnet" "webapp" {
     }
   }
 
-  service_endpoints = [ "Microsoft.Web", "Microsoft.SQL" ]
+  service_endpoints = ["Microsoft.Web", "Microsoft.SQL"]
 }
 
 resource "azurerm_subnet" "db" {
@@ -54,25 +54,6 @@ resource "azurerm_private_endpoint" "sql_endpoint" {
     private_dns_zone_ids = [azurerm_private_dns_zone.database_dns_zone.id]
   }
 }
-/*
-resource "azurerm_private_endpoint" "sql_app_endpoint" {
-  name                = "${local.env}.private-endpoint-webapp"
-  location            = local.location
-  resource_group_name = local.resource_group_name
-  subnet_id           = azurerm_subnet.webapp.id
-
-  private_service_connection {
-    name                           = "${local.env}-private-serviceconnection"
-    private_connection_resource_id = module.sql_server.sql_server_id
-    subresource_names              = ["sqlServer"]
-    is_manual_connection           = false
-  }
-
-  private_dns_zone_group {
-    name                 = "dns-zone-group"
-    private_dns_zone_ids = [azurerm_private_dns_zone.database_dns_zone.id]
-  }
-}*/
 
 # Create private DNS zone
 resource "azurerm_private_dns_zone" "database_dns_zone" {

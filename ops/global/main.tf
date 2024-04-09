@@ -48,5 +48,5 @@ module "sql_server" {
   resource_group_name = local.resource_group_name
   global_vault_id     = azurerm_key_vault.kv.id
   administrator_login = "octopus_admin"
-  webapp_subnet_id = azurerm_subnet.webapp.id
+  webapp_subnet_id    = azurerm_subnet.webapp.id
 }
