@@ -16,6 +16,7 @@ resource "azurerm_key_vault" "kv" {
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
 
+
   sku_name = "standard"
 }
 
@@ -32,15 +33,20 @@ module "octopus_service" {
   key_vault_id = azurerm_key_vault.kv.id
 
   webapp_subnet_id = azurerm_subnet.webapp.id
+
+  depends_on = [module.sql_server]
 }
 
 
 module "sql_server" {
-  source = "../resources/sql_database"
+  source   = "../resources/sql_database"
   team     = local.team
   project  = local.project
   env      = local.env
   location = local.location
 
   resource_group_name = local.resource_group_name
+  global_vault_id     = azurerm_key_vault.kv.id
+  administrator_login = "octopus_admin"
+  webapp_subnet_id = azurerm_subnet.webapp.id
 }

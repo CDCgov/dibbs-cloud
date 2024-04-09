@@ -22,3 +22,19 @@ variable "resource_group_name" {
   description = "The name of the resource group to deploy to"
   type        = string
 }
+
+variable "global_vault_id" {
+  description = "The ID of the global key vault"
+  type        = string
+}
+
+
+variable "administrator_login" {
+  type        = string
+  description = "The administrator login for the SQL Server."
+}
+
+variable "webapp_subnet_id" {
+  type        = string
+  description = "The ID of the subnet where the client webapp is deployed."
+}
