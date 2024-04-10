@@ -16,23 +16,23 @@ resource "azurerm_linux_web_app" "octopus" {
   location            = var.location
   service_plan_id     = azurerm_service_plan.octopus.id
   app_settings = {
-    "ACCEPT_EULA" = "Y"
-    "ACCEPT_OCTOPUS_EULA" = "Y"
-    "OCTOPUS_SERVER_NODE_NAME" = "${local.name}-octopus"
-    "DB_CONNECTION_STRING" = "Server=tcp:${local.name}-octopus-sqlserver.database.windows.net,1433;Initial Catalog=octopus-db;Persist Security Info=False;User ID=${data.azurerm_key_vault_secret.db_username.value};Password=${data.azurerm_key_vault_secret.db_password.value};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
-    "ADMIN_USERNAME" = "${data.azurerm_key_vault_secret.octopus_admin_username.value}"
-    "ADMIN_PASSWORD" = "${data.azurerm_key_vault_secret.octopus_admin_password.value}"
-    "ADMIN_EMAIL" = ""
-    "MASTER_KEY" = "${data.azurerm_key_vault_secret.octopus_master_key.value}"
-    "DISABLE_DIND" = "true"
-    "TASK_CAP" = "5"
-    "SA_PASSWORD" = data.azurerm_key_vault_secret.db_password.value
+    "ACCEPT_EULA"                         = "Y"
+    "ACCEPT_OCTOPUS_EULA"                 = "Y"
+    "OCTOPUS_SERVER_NODE_NAME"            = "${local.name}-octopus"
+    "DB_CONNECTION_STRING"                = "Server=tcp:${local.name}-octopus-sqlserver.database.windows.net,1433;Initial Catalog=octopus-db;Persist Security Info=False;User ID=${data.azurerm_key_vault_secret.db_username.value};Password=${data.azurerm_key_vault_secret.db_password.value};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+    "ADMIN_USERNAME"                      = "${data.azurerm_key_vault_secret.octopus_admin_username.value}"
+    "ADMIN_PASSWORD"                      = "${data.azurerm_key_vault_secret.octopus_admin_password.value}"
+    "ADMIN_EMAIL"                         = ""
+    "MASTER_KEY"                          = "${data.azurerm_key_vault_secret.octopus_master_key.value}"
+    "DISABLE_DIND"                        = "true"
+    "TASK_CAP"                            = "5"
+    "SA_PASSWORD"                         = data.azurerm_key_vault_secret.db_password.value
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = "1200"
   }
 
   site_config {
     application_stack {
-      docker_image_name = "octopusdeploy/octopusdeploy:2024.1"
+      docker_image_name   = "octopusdeploy/octopusdeploy:2024.1"
       docker_registry_url = "https://index.docker.io"
     }
   }

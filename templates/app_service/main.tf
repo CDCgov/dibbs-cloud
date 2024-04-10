@@ -21,8 +21,8 @@ resource "azurerm_linux_web_app" "service" {
 
   site_config {
     application_stack {
-      docker_image_name = "octopusdeploy/octopusdeploy:2024.1" //Change this image name to suit your needs.
-      docker_registry_url = "https://index.docker.io" //Modify this to suit the registry your image is being pulled from. This can also be your own ACR instance.
+      docker_image_name   = "octopusdeploy/octopusdeploy:2024.1" //Change this image name to suit your needs.
+      docker_registry_url = "https://index.docker.io"            //Modify this to suit the registry your image is being pulled from. This can also be your own ACR instance.
     }
   }
 

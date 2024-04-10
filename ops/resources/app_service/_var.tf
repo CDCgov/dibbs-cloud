@@ -40,5 +40,5 @@ variable "resource_group_name" {
 
 variable "database_server_id" {
   description = "Identifier corresponding to the intended destination database server"
-  default = null
+  default     = null
 }
