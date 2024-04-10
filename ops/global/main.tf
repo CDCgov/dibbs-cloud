@@ -35,7 +35,7 @@ module "octopus_service" {
   webapp_subnet_id = azurerm_subnet.webapp.id
 
   storage_account_name = azurerm_storage_account.app.name
-  storage_account_key = azurerm_storage_account.app.primary_access_key
+  storage_account_key  = azurerm_storage_account.app.primary_access_key
 
   depends_on = [module.sql_server, azurerm_storage_share.repository, azurerm_storage_share.artifacts, azurerm_storage_share.tasklogs, azurerm_storage_share.cache, azurerm_storage_share.import, azurerm_storage_share.eventExports]
 }
@@ -53,8 +53,8 @@ module "sql_server" {
   administrator_login = "octopus_admin"
   webapp_subnet_id    = azurerm_subnet.webapp.id
 
-  primary_access_key = azurerm_storage_account.app.primary_access_key
+  primary_access_key    = azurerm_storage_account.app.primary_access_key
   primary_blob_endpoint = azurerm_storage_account.app.primary_blob_endpoint
 
-  depends_on = [ azurerm_storage_account.app ]
+  depends_on = [azurerm_storage_account.app]
 }

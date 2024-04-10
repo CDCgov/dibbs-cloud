@@ -14,35 +14,35 @@ resource "azurerm_storage_account" "app" {
 resource "azurerm_storage_share" "repository" {
   name                 = "repository"
   storage_account_name = azurerm_storage_account.app.name
-  quota = 5
+  quota                = 5
 }
 
 resource "azurerm_storage_share" "artifacts" {
   name                 = "artifacts"
   storage_account_name = azurerm_storage_account.app.name
-  quota = 5
+  quota                = 5
 }
 
 resource "azurerm_storage_share" "tasklogs" {
   name                 = "tasklogs"
   storage_account_name = azurerm_storage_account.app.name
-  quota = 5
+  quota                = 5
 }
 
 resource "azurerm_storage_share" "cache" {
   name                 = "cache"
   storage_account_name = azurerm_storage_account.app.name
-  quota = 5
+  quota                = 5
 }
 
 resource "azurerm_storage_share" "import" {
   name                 = "import"
   storage_account_name = azurerm_storage_account.app.name
-  quota = 5
+  quota                = 5
 }
 
 resource "azurerm_storage_share" "eventExports" {
   name                 = "eventexports"
   storage_account_name = azurerm_storage_account.app.name
-  quota = 5
+  quota                = 5
 }

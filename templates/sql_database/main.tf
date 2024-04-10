@@ -10,7 +10,7 @@ resource "azurerm_mssql_server" "sql" {
   administrator_login          = azurerm_key_vault_secret.db_username.value
   administrator_login_password = data.azurerm_key_vault_secret.db_password.value
 
-  minimum_tls_version          = "1.2"
+  minimum_tls_version = "1.2"
 
   // Uncomment this if you wish to use a Private Endpoint setup instead of VNET rules.
   //public_network_access_enabled = false

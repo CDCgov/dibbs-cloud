@@ -6,7 +6,7 @@ resource "azurerm_mssql_server" "octopus" {
   administrator_login          = azurerm_key_vault_secret.db_username.value
   administrator_login_password = data.azurerm_key_vault_secret.db_password.value
 
-  minimum_tls_version          = "1.2"
+  minimum_tls_version = "1.2"
 }
 
 resource "azurerm_mssql_database" "octopus" {

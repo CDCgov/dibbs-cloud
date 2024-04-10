@@ -45,10 +45,10 @@ variable "database_server_id" {
 
 variable "storage_account_name" {
   description = "Name of the storage account to which data will be stored."
-  type = string
+  type        = string
 }
 
 variable "storage_account_key" {
   description = "Key for the destination storage account."
-  type = string
+  type        = string
 }

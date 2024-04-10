@@ -40,11 +40,11 @@ variable "webapp_subnet_id" {
 }
 
 variable "primary_access_key" {
-  type = string
+  type        = string
   description = "value of the primary access key for the storage account"
 }
 
 variable "primary_blob_endpoint" {
-  type = string
+  type        = string
   description = "Destination blob endpoint for the storage account"
 }

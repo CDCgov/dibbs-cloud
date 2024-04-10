@@ -1,6 +1,6 @@
 locals {
-  name = "${var.team}-${var.project}-${var.env}"
-  octopus_mounts = [ "repository", "artifacts", "tasklogs", "cache", "import"]
+  name           = "${var.team}-${var.project}-${var.env}"
+  octopus_mounts = ["repository", "artifacts", "tasklogs", "cache", "import"]
 }
 
 resource "azurerm_service_plan" "octopus" {
@@ -46,14 +46,14 @@ resource "azurerm_linux_web_app" "octopus" {
     for_each = local.octopus_mounts
 
     content {
-      name        = "${storage_account.value}"
+      name         = storage_account.value
       account_name = var.storage_account_name
-      access_key = var.storage_account_key
-      share_name = "${storage_account.value}"
-      mount_path = "/${storage_account.value}"
-      type = "AzureFiles"
+      access_key   = var.storage_account_key
+      share_name   = storage_account.value
+      mount_path   = "/${storage_account.value}"
+      type         = "AzureFiles"
     }
-  }  
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "app_secret_access" {
