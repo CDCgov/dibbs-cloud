@@ -42,3 +42,13 @@ variable "database_server_id" {
   description = "Identifier corresponding to the intended destination database server"
   default     = null
 }
+
+variable "storage_account_name" {
+  description = "Name of the storage account to which data will be stored."
+  type = string
+}
+
+variable "storage_account_key" {
+  description = "Key for the destination storage account."
+  type = string
+}

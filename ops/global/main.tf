@@ -7,6 +7,7 @@ locals {
   resource_group_name = "${local.team}-${local.project}-${local.env}"
 }
 
+#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-05-01
 resource "azurerm_key_vault" "kv" {
   name                        = "${local.team}${local.project}${local.env}kv"
   location                    = local.location
@@ -15,7 +16,6 @@ resource "azurerm_key_vault" "kv" {
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
-
 
   sku_name = "standard"
 }
@@ -34,7 +34,10 @@ module "octopus_service" {
 
   webapp_subnet_id = azurerm_subnet.webapp.id
 
-  depends_on = [module.sql_server]
+  storage_account_name = azurerm_storage_account.app.name
+  storage_account_key = azurerm_storage_account.app.primary_access_key
+
+  depends_on = [module.sql_server, azurerm_storage_share.repository, azurerm_storage_share.artifacts, azurerm_storage_share.tasklogs, azurerm_storage_share.cache, azurerm_storage_share.import, azurerm_storage_share.eventExports]
 }
 
 
@@ -49,4 +52,9 @@ module "sql_server" {
   global_vault_id     = azurerm_key_vault.kv.id
   administrator_login = "octopus_admin"
   webapp_subnet_id    = azurerm_subnet.webapp.id
+
+  primary_access_key = azurerm_storage_account.app.primary_access_key
+  primary_blob_endpoint = azurerm_storage_account.app.primary_blob_endpoint
+
+  depends_on = [ azurerm_storage_account.app ]
 }

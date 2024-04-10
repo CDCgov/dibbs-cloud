@@ -38,3 +38,13 @@ variable "webapp_subnet_id" {
   type        = string
   description = "The ID of the subnet where the client webapp is deployed."
 }
+
+variable "primary_access_key" {
+  type = string
+  description = "value of the primary access key for the storage account"
+}
+
+variable "primary_blob_endpoint" {
+  type = string
+  description = "Destination blob endpoint for the storage account"
+}

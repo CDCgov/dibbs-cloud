@@ -22,3 +22,7 @@ output "acr_admin_password" {
   value     = azurerm_container_registry.acr.admin_password
   sensitive = true
 }
+
+output "key_vault_id" {
+  value = azurerm_key_vault.kv.id
+}
