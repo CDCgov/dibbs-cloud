@@ -31,6 +31,8 @@ resource "azurerm_linux_web_app" "octopus" {
     "WEBSITES_CONTAINER_START_TIME_LIMIT" = "1200"
   }
 
+  virtual_network_subnet_id = var.webapp_subnet_id
+
   site_config {
     application_stack {
       docker_image_name   = "octopusdeploy/octopusdeploy:2024.1"
