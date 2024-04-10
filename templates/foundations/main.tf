@@ -36,3 +36,9 @@ resource "azurerm_storage_account" "app" {
   allow_nested_items_to_be_public  = false
   cross_tenant_replication_enabled = false
 }
+
+resource "azurerm_storage_share" "share" {
+  name                 = "share"
+  storage_account_name = azurerm_storage_account.app.name
+  quota                = 5
+}
