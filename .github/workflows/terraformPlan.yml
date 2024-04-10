@@ -6,7 +6,14 @@ on:
       env:
         description: "Environment target"
         required: true
-        default: "prod" 
+        type: choice
+        options:
+          - ""
+          - dev
+          - stg
+          - prod
+          - prod-dmz
+          - global
 
 env:
   ARM_CLIENT_ID: ${{ secrets.TERRAFORM_ARM_CLIENT_ID }}

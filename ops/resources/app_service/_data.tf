@@ -1,9 +1,5 @@
 data "azurerm_client_config" "current" {}
 
-data "azurerm_resource_group" "rg" {
-  name = var.resource_group_name
-}
-
 data "azurerm_key_vault_secret" "db_username" {
   name         = "octopus-${var.env}-db-username"
   key_vault_id = var.key_vault_id

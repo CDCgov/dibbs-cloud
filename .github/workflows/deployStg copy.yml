@@ -1,0 +1,28 @@
+name: Deploy Global
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DEPLOY_ENV: global
+
+concurrency:
+  group: global-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy_infra:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/tf-deploy
+        name: Deploy with Terraform
+        with:
+          azure_creds: ${{ secrets.AZURE_CREDENTIALS }}
+          deploy_env: ${{ env.deploy_env }}
+          terraform_arm_client_id: ${{ secrets.TERRAFORM_ARM_CLIENT_ID }}
+          terraform_arm_client_secret: ${{ secrets.TERRAFORM_ARM_CLIENT_SECRET }}
+          terraform_arm_subscription_id: ${{ secrets.TERRAFORM_ARM_SUBSCRIPTION_ID }}
+          terraform_arm_tenant_id: ${{ secrets.TERRAFORM_ARM_TENANT_ID }}

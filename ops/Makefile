@@ -13,7 +13,7 @@ CURL_TIMEOUT?=20
 
 # Internal target: check if the passed-in wildcard is a known environment name. Hard-coding them because let's be real here.
 .valid-env-%:
-	@case $* in dev|stg|prod|prod-dmz) ;; *) echo "$* is not a valid environment"; exit 1;; esac
+	@case $* in dev|stg|prod|prod-dmz|global) ;; *) echo "$* is not a valid environment"; exit 1;; esac
 
 api.tfvars: /dev/null
 	echo "acr_image_tag=\"$(DEPLOYED_COMMIT)\"" > $@; \
