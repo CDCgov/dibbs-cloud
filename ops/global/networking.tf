@@ -24,7 +24,7 @@ resource "azurerm_subnet" "webapp" {
     }
   }
 
-  service_endpoints = ["Microsoft.Web", "Microsoft.SQL"]
+  service_endpoints = ["Microsoft.Web", "Microsoft.Sql"]
 }
 
 resource "azurerm_subnet" "db" {
