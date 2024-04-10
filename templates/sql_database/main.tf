@@ -1,15 +1,22 @@
-resource "azurerm_mssql_server" "octopus" {
-  name                         = "dibbs-ce-${var.env}-octopus-sqlserver"
+locals {
+  name = "${var.team}-${var.project}-${var.env}"
+}
+
+resource "azurerm_mssql_server" "sql" {
+  name                         = "${local.name}-sqlserver"
   resource_group_name          = var.resource_group_name
   location                     = var.location
   version                      = "12.0"
   administrator_login          = azurerm_key_vault_secret.db_username.value
   administrator_login_password = data.azurerm_key_vault_secret.db_password.value
+
+  // Uncomment this if you wish to use a Private Endpoint setup instead of VNET rules.
+  //public_network_access_enabled = false
 }
 
-resource "azurerm_mssql_database" "octopus" {
-  name           = "octopus-db"
-  server_id      = azurerm_mssql_server.octopus.id
+resource "azurerm_mssql_database" "sql_database" {
+  name           = "${local.name}-db"
+  server_id      = azurerm_mssql_server.sql.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
   max_size_gb    = 5
@@ -28,13 +35,13 @@ resource "azurerm_mssql_database" "octopus" {
 
 resource "azurerm_mssql_firewall_rule" "azure_services" {
   name             = "AzureServices"
-  server_id        = azurerm_mssql_server.octopus.id
+  server_id        = azurerm_mssql_server.sql.id
   start_ip_address = "0.0.0.0"
   end_ip_address   = "0.0.0.0"
 }
 
-resource "azurerm_mssql_virtual_network_rule" "octopus" {
+resource "azurerm_mssql_virtual_network_rule" "sql_vnet_rule" {
   name      = "sql-vnet-rule"
-  server_id = azurerm_mssql_server.octopus.id
+  server_id = azurerm_mssql_server.sql.id
   subnet_id = var.webapp_subnet_id
 }
