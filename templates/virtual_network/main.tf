@@ -21,6 +21,13 @@ resource "azurerm_subnet" "appgw" {
   ]
 }
 
+resource "azurerm_subnet" "kube" {
+  name                 = "${local.name}-kube"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [var.k8s_subnet_address_prefix]
+}
+
 resource "azurerm_subnet" "lbs" {
   name                 = "${local.name}-lb"
   resource_group_name  = var.resource_group_name
