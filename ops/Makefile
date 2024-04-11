@@ -16,7 +16,7 @@ CURL_TIMEOUT?=20
 	@case $* in dev|stg|prod|prod-dmz|global) ;; *) echo "$* is not a valid environment"; exit 1;; esac
 
 api.tfvars: /dev/null
-	echo "acr_image_tag=\"$(DEPLOYED_COMMIT)\"" > $@; \
+	echo "acr_image_tag=\"$(OCTOPUS_VERSION)\"" > $@; \
 	echo "deploy_workflow=\"${GITHUB_WORKFLOW}\"" >> $@; \
 	if [[ "release" == "$(GITHUB_EVENT_NAME)" ]]; \
 		then echo "deploy_tag=\"$(RELEASE_TAG)\"" >> $@;\

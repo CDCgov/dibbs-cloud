@@ -25,17 +25,11 @@ runs:
         username: ${{ inputs.acr_username }}
 
 
-    - name: Set short git commit SHA
-      shell: bash
-      id: vars
+    - name: Set variables
+      working-directory: ./octopus
       run: |
-        calculatedSha=$(git rev-parse --short ${{ github.sha }})
-        echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
- 
-    - name: Confirm git commit SHA output
-      shell: bash
-      run: |
-        echo ${{ env.COMMIT_SHORT_SHA }}   
+        VER=$(cat VERSION)
+        echo "VERSION=$VER" >> $GITHUB_ENV  
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
@@ -44,5 +38,5 @@ runs:
         file: ./octopus/dockerfile
         push: true
         tags: |
-          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:${{ env.COMMIT_SHORT_SHA }}
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:${{ env.VERSION }}
           ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:latest

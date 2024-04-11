@@ -24,7 +24,7 @@ jobs:
       uses: ./.github/workflows/checkForChanges.yml
 
   build_docs:
-    if: needs.workflow_changes.outputs.has_changes == 'true' || needs.octopus_changes.outputs.has_changes == 'true' || inputs.force_build == 'true' || github.ref == 'refs/heads/main'
+    if: needs.workflow_changes.outputs.has_changes == 'true' || needs.octopus_changes.outputs.has_changes == 'true' || github.ref == 'refs/heads/main'
     needs:
       - workflow_changes
       - octopus_changes
