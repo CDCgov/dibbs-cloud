@@ -52,3 +52,23 @@ variable "storage_account_key" {
   description = "Key for the destination storage account."
   type        = string
 }
+
+variable "octopus_image_version" {
+  description = "The version of the custom Octopus image to deploy"
+  type        = string
+}
+
+variable "acr_url" {
+  description = "The URL of the Azure Container Registry"
+  type        = string
+}
+
+variable "acr_username" {
+  description = "The username for the Azure Container Registry"
+  type        = string
+}
+
+variable "acr_password" {
+  description = "The password for the Azure Container Registry"
+  type        = string
+}

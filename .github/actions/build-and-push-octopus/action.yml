@@ -1,6 +1,6 @@
-name: Build Docs Container
-run-name: Build Docs Container by @{{github.actor}}
-description: Build and push Docs container image to the registry
+name: Build and Push Octopus Container
+run-name: Build and Push Octopus Container by @{{github.actor}}
+description: Build and push Octopus container image to the registry
 inputs:
   acr_registry:
     description: Azure Container Registry to push the image to
@@ -40,9 +40,9 @@ runs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./docs
-        file: ./docs/dockerfile
+        context: ./octopus
+        file: ./octopus/dockerfile
         push: true
         tags: |
-          ${{ inputs.acr_registry }}/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
-          ${{ inputs.acr_registry }}/dibbs-cloud/docs:latest
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:${{ env.COMMIT_SHORT_SHA }}
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:latest

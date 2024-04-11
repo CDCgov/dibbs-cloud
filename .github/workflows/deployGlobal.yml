@@ -13,6 +13,31 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  workflow_changes:
+    with:
+      what_to_check: ./.github
+    uses: ./.github/workflows/checkForChanges.yml
+
+  octopus_changes:
+      with:
+        what_to_check: ./octopus
+      uses: ./.github/workflows/checkForChanges.yml
+
+  build_docs:
+    if: needs.workflow_changes.outputs.has_changes == 'true' || needs.octopus_changes.outputs.has_changes == 'true' || inputs.force_build == 'true' || github.ref == 'refs/heads/main'
+    needs:
+      - workflow_changes
+      - octopus_changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and Push Octopus container
+        uses: ./.github/actions/build-and-push-octopus
+        with:
+          acr_registry: ${{ secrets.ACR_REPO_URL }}
+          acr_username: ${{ secrets.ACR_ADMIN_USERNAME }}
+          acr_password: ${{ secrets.ACR_ADMIN_PASSWORD }}
+  
   deploy_infra:
     runs-on: ubuntu-latest
     steps:
