@@ -6,13 +6,13 @@ For security and resiliency, VNets are isolated from one another. This isolation
 
 
 ## File Structure
-VNet templates are located in the `templates/virtual_network` directory. The `main.tf` file contains the VNet and subnet resource definitions. The `_vars.tf` file contains the input variables for the VNet resource. The `_output.tf` file contains the output variables for the VNet resource.
+VNet templates are located in the `templates/virtual_network` directory. The `main.tf` file contains the VNet and subnet resource definitions. The `_var.tf` file contains the input variables for the VNet resource. The `_output.tf` file contains the output variables for the VNet resource.
 
 ```
 - templates
   - virtual_network
     - main.tf
-    - _vars.tf
+    - _var.tf
     - _output.tf
 ```
 

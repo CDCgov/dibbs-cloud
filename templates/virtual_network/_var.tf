@@ -1,21 +1,21 @@
 variable "team" {
   description = "One-word identifier for this project's custodial team."
-  type = string
+  type        = string
 }
 
 variable "project" {
   description = "One-word identifier or code name for this project."
-  type = string
+  type        = string
 }
 
 variable "env" {
   description = "One-word identifier for the target environment (e.g. dev, test, prod)."
-  type = string
+  type        = string
 }
 
 variable "location" {
   description = "The Azure region in which the associated resources will be created."
-  type = string
+  type        = string
 }
 
 variable "resource_group_name" {
@@ -25,8 +25,8 @@ variable "resource_group_name" {
 
 variable "network_address_space" {
   description = "The desired address space for the full virtual network"
-  type = string
-  default = "10.30.0.0/16"
+  type        = string
+  default     = "10.30.0.0/16"
 }
 
 variable "k8s_subnet_address_prefix" {

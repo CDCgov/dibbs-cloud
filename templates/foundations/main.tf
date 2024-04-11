@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
-#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-04-01
+#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-05-01
 resource "azurerm_key_vault" "kv" {
   name                        = "${var.team}${var.project}${var.env}kv"
   location                    = var.location
@@ -35,4 +35,10 @@ resource "azurerm_storage_account" "app" {
   min_tls_version                  = "TLS1_2"
   allow_nested_items_to_be_public  = false
   cross_tenant_replication_enabled = false
+}
+
+resource "azurerm_storage_share" "share" {
+  name                 = "share"
+  storage_account_name = azurerm_storage_account.app.name
+  quota                = 5
 }

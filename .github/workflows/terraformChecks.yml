@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TERRAFORM_DIRS: |
-          dev stg prod
+          dev stg prod global
     steps:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3.0.0
@@ -77,3 +77,9 @@ jobs:
       - name: Terraform Plan Prod
         if: ${{ github.actor != 'dependabot[bot]' }}
         run: make plan-prod
+      - name: Terraform Init Global
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        run: make init-global
+      - name: Terraform Plan Global
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        run: make plan-global

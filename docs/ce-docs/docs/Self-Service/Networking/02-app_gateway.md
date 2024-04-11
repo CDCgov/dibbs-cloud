@@ -6,13 +6,13 @@ For systems that utilize an Azure Kubernetes Cluster, an App Gateway can be conf
 
 
 ## File Structure
-App Gateway templates are located in the `templates/virtual_network` directory. The `main.tf` file contains the VNet and subnet resource definitions on which the App Gateway depends; the gateway object itself is contained within the `gateway.tf` file. The `_vars.tf` file contains the input variables for the resource. The `_output.tf` file contains the output variables for the resource. Note that the variable and output files are shared with the virtual network resources, since there is a direct dependency (no VNet, no App Gateway).
+App Gateway templates are located in the `templates/virtual_network` directory. The `main.tf` file contains the VNet and subnet resource definitions on which the App Gateway depends; the gateway object itself is contained within the `gateway.tf` file. The `_var.tf` file contains the input variables for the resource. The `_output.tf` file contains the output variables for the resource. Note that the variable and output files are shared with the virtual network resources, since there is a direct dependency (no VNet, no App Gateway).
 
 ```
 - templates
   - virtual_network
     - main.tf
-    - _vars.tf
+    - _var.tf
     - _output.tf
     - gateway.tf
 ```

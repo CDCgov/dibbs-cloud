@@ -38,7 +38,7 @@ runs:
         ARM_TENANT_ID: ${{ inputs.terraform_arm_tenant_id }}
       shell: bash
       run: make init-${{ inputs.deploy_env }}
-    - name: Terraform deploy (infrastructure and staging slot)
+    - name: Terraform Apply
       working-directory: ./ops
       env: # all Azure interaction is through Terraform
         ARM_CLIENT_ID: ${{ inputs.terraform_arm_client_id }}

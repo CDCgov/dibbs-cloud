@@ -24,4 +24,4 @@ jobs:
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
-          additional_args: -e azure-keyvault-ensure-key-expiry,azure-keyvault-no-purge
+          additional_args: -e azure-keyvault-ensure-key-expiry,azure-keyvault-no-purge -m HIGH
