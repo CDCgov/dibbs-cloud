@@ -20,6 +20,19 @@ resource "azurerm_key_vault" "kv" {
   sku_name = "standard"
 }
 
+resource "azurerm_container_registry" "acr" {
+  location            = local.location
+  name                = "${local.team}${local.project}${local.env}acr"
+  resource_group_name = local.resource_group_name
+  sku                 = "Standard"
+  admin_enabled       = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+}
+
 module "octopus_service" {
   source   = "../resources/app_service"
   team     = local.team
