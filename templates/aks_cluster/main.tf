@@ -1,5 +1,5 @@
 locals {
-  name           = "${var.team}-${var.project}-${var.env}"
+  name = "${var.team}-${var.project}-${var.env}"
 }
 
 resource "azurerm_kubernetes_cluster" "k8s" {

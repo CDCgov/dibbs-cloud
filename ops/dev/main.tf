@@ -30,7 +30,7 @@ module "aks" {
   env                 = local.env
   location            = local.location
   resource_group_name = module.foundations.resource_group_name
-  
+
   aks_subnet_id = module.virtual_network.subnet_kube_id
-  agic_id = module.virtual_network.agic_id
+  agic_id       = module.virtual_network.agic_id
 }
