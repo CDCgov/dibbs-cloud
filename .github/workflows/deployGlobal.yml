@@ -29,7 +29,7 @@ jobs:
         what_to_check: ./octopus
       uses: ./.github/workflows/checkForChanges.yml
 
-  build_docs:
+  build_octopus:
     if: needs.workflow_changes.outputs.has_changes == 'true' || needs.octopus_changes.outputs.has_changes == 'true' || github.ref == 'refs/heads/main'
     needs:
       - workflow_changes
@@ -45,6 +45,7 @@ jobs:
           acr_password: ${{ secrets.ACR_ADMIN_PASSWORD }}
   
   deploy_infra:
+    needs: [build_octopus]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

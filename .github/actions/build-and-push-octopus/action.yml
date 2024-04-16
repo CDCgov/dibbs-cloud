@@ -24,9 +24,9 @@ runs:
         registry: ${{ inputs.acr_registry }}
         username: ${{ inputs.acr_username }}
 
-
     - name: Set variables
       working-directory: ./octopus
+      shell: bash
       run: |
         VER=$(cat VERSION)
         echo "VERSION=$VER" >> $GITHUB_ENV  

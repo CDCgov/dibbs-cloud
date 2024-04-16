@@ -31,6 +31,7 @@ runs:
         terraform_version: 1.7.4
     - name: Set variables
       working-directory: ./octopus
+      shell: bash
       run: |
         VER=$(cat VERSION)
         echo "VERSION=$VER" >> $GITHUB_ENV  
