@@ -72,6 +72,29 @@ resource "azurerm_application_gateway" "k8s" {
     azurerm_virtual_network.vnet,
     azurerm_public_ip.k8s_ingress
   ]
+
+  // Ignore changes is required for a K8s-focused App Gateway object,
+  // as Azure will manage all necessary adjustments when changes are made
+  // to the AKS cluster.
+  //
+  // Failure to add this block can result in a disconnected AGIC, and loss
+  // of traffic to the AKS cluster.
+  lifecycle {
+    ignore_changes = [
+      tags,
+      ssl_certificate,
+      trusted_root_certificate,
+      frontend_port,
+      backend_address_pool,
+      backend_http_settings,
+      http_listener,
+      url_path_map,
+      request_routing_rule,
+      probe,
+      redirect_configuration,
+      ssl_policy,
+    ]
+  }
 }
 
 resource "azurerm_public_ip" "k8s_ingress" {

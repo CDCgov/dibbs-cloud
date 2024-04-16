@@ -26,6 +26,11 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = local.resource_group_name
   sku                 = "Standard"
   admin_enabled       = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
 }
 
 module "octopus_service" {
