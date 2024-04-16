@@ -87,4 +87,6 @@ jobs:
         run: make init-global
       - name: Terraform Plan Global
         if: ${{ github.actor != 'dependabot[bot]' }}
+        env:
+          OCTOPUS_VERSION: ${{ env.VERSION }}
         run: make plan-global

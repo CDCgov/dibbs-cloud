@@ -43,4 +43,6 @@ jobs:
       - name: Terraform Init
         run: make init-${{ github.event.inputs.env }}
       - name: Terraform plan
+        env:
+          OCTOPUS_VERSION: ${{ env.VERSION }}
         run: make plan-${{ github.event.inputs.env }}
