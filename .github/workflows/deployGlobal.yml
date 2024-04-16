@@ -1,15 +1,9 @@
 name: Deploy Global
 
 on:
-  workflow_dispatch:
-    inputs:
-      deploy_env:
-        description: 'The environment to deploy to'
-        required: true
-        type: choice
-        options:
-          - ""
-          - global
+  push:
+    branches:
+      - main
 
 env:
   DEPLOY_ENV: global
