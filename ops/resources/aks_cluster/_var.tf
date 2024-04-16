@@ -62,3 +62,8 @@ variable "aks_dns_service_ip" {
   description = "DNS server IP address"
   default     = "10.0.0.10"
 }
+
+variable "key_vault_id" {
+  type        = string
+  description = "The ID of the Key Vault to use for secrets management"
+}

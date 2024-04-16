@@ -2,6 +2,16 @@ locals {
   name = "${var.team}-${var.project}-${var.env}"
 }
 
+resource "azurerm_log_analytics_workspace" "analytics" {
+  name                = "${local.name}-logs"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  sku                 = "PerGB2018"
+  retention_in_days   = 30
+
+  daily_quota_gb = 5
+}
+
 #tfsec:ignore:azure-container-configured-network-policy:exp:2024-06-01
 #tfsec:ignore:azure-container-limit-authorized-ips:exp:2024-06-01
 #tfsec:ignore:azure-container-use-rbac-permissions:exp:2024-06-01
@@ -11,16 +21,27 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   resource_group_name = var.resource_group_name
   dns_prefix          = local.name
 
+  azure_policy_enabled = true
+
+  microsoft_defender {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.analytics.id
+  }
+
   default_node_pool {
     name            = "agentpool"
     node_count      = var.aks_agent_count
     vm_size         = var.aks_agent_vm_size
     os_disk_size_gb = var.aks_agent_os_disk_size
     vnet_subnet_id  = var.aks_subnet_id
+
+    upgrade_settings {
+      max_surge = "10%"
+    }
   }
 
-  identity {
-    type = "SystemAssigned"
+  service_principal {
+    client_id     = data.azurerm_key_vault_secret.service_principal_client_id.value
+    client_secret = data.azurerm_key_vault_secret.service_principal_client_secret.value
   }
 
   network_profile {
