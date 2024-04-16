@@ -50,9 +50,9 @@ module "octopus_service" {
   storage_account_name = azurerm_storage_account.app.name
   storage_account_key  = azurerm_storage_account.app.primary_access_key
 
-  acr_url = azurerm_container_registry.acr.login_server
-  acr_username = azurerm_container_registry.acr.admin_username
-  acr_password = azurerm_container_registry.acr.admin_password
+  acr_url               = azurerm_container_registry.acr.login_server
+  acr_username          = azurerm_container_registry.acr.admin_username
+  acr_password          = azurerm_container_registry.acr.admin_password
   octopus_image_version = var.acr_image_tag
 
   depends_on = [module.sql_server, azurerm_storage_share.repository, azurerm_storage_share.artifacts, azurerm_storage_share.tasklogs, azurerm_storage_share.cache, azurerm_storage_share.import, azurerm_storage_share.eventExports]

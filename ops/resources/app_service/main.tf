@@ -35,7 +35,7 @@ resource "azurerm_linux_web_app" "octopus" {
 
   site_config {
     application_stack {
-      docker_image_name   = "${ var.acr_url }/dibbs-cloud/octopusdeploy:${var.octopus_image_version}"
+      docker_image_name   = "${var.acr_url}/dibbs-cloud/octopusdeploy:${var.octopus_image_version}"
       docker_registry_url = "https://index.docker.io"
     }
   }
