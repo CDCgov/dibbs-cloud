@@ -12,7 +12,7 @@ RUN AZ_DIST=$(lsb_release -cs) echo "Types: deb \
     Suites: ${AZ_DIST} \
     Components: main \
     Architectures: $(dpkg --print-architecture) \
-    Signed-by: /etc/apt/keyrings/microsoft.gpg" | sudo tee /etc/apt/sources.list.d/azure-cli.sources
+    Signed-by: /etc/apt/keyrings/microsoft.gpg" | tee /etc/apt/sources.list.d/azure-cli.sources
 RUN apt update
 RUN apt install -y kubectl helm azure-cli
 ENTRYPOINT [ "./install.sh" ]
