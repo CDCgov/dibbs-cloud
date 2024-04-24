@@ -42,7 +42,6 @@ module "app_service" {
   depends_on = [module.sql_server]
 }
 
-
 module "sql_server" {
   source   = "../resources/sql_database"
   team     = local.team
@@ -52,6 +51,18 @@ module "sql_server" {
 
   resource_group_name = local.resource_group_name
   global_vault_id     = module.foundations.key_vault_id
-  administrator_login = "octopus_admin"
+  administrator_login = "admin"
   webapp_subnet_id    = module.virtual_network.subnet_lbs_id
+}
+
+module "aks" {
+  source              = "../resources/aks_cluster"
+  team                = local.team
+  project             = local.project
+  env                 = local.env
+  location            = local.location
+  resource_group_name = module.foundations.resource_group_name
+
+  aks_subnet_id = module.virtual_network.subnet_kube_id
+  agic_id       = module.virtual_network.agic_id
 }
