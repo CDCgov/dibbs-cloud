@@ -103,4 +103,6 @@ resource "azurerm_public_ip" "k8s_ingress" {
   resource_group_name = data.azurerm_resource_group.rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
+
+  domain_name_label = "${local.name}"
 }
