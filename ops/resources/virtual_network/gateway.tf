@@ -104,5 +104,5 @@ resource "azurerm_public_ip" "k8s_ingress" {
   allocation_method   = "Static"
   sku                 = "Standard"
 
-  domain_name_label = "${local.name}"
+  domain_name_label = local.name
 }
