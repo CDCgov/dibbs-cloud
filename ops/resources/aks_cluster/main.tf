@@ -65,7 +65,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   lifecycle {
-    ignore_changes = [ "key_vault_secrets_provider", "web_app_routing" ]
+    ignore_changes = [ key_vault_secrets_provider, web_app_routing ]
   }
 }
 
