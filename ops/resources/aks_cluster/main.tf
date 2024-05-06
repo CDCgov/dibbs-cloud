@@ -63,6 +63,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       key_data = jsondecode(azapi_resource_action.ssh_public_key_gen.output).publicKey
     }
   }
+
+  lifecycle {
+    ignore_changes = [key_vault_secrets_provider, web_app_routing]
+  }
 }
 
 variable "vm_username" {

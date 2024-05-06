@@ -29,6 +29,12 @@ runs:
     - uses: hashicorp/setup-terraform@v3.1.0
       with:
         terraform_version: 1.7.4
+    - name: Set variables
+      working-directory: ./octopus
+      shell: bash
+      run: |
+        VER=$(cat VERSION)
+        echo "VERSION=$VER" >> $GITHUB_ENV  
     - name: Terraform Init
       working-directory: ./ops
       env: # all Azure interaction is through Terraform
@@ -36,6 +42,7 @@ runs:
         ARM_CLIENT_SECRET: ${{ inputs.terraform_arm_client_secret }}
         ARM_SUBSCRIPTION_ID: ${{ inputs.terraform_arm_subscription_id }}
         ARM_TENANT_ID: ${{ inputs.terraform_arm_tenant_id }}
+        OCTOPUS_VERSION: ${{ env.VERSION }}
       shell: bash
       run: make init-${{ inputs.deploy_env }}
     - name: Terraform Apply
@@ -45,5 +52,6 @@ runs:
         ARM_CLIENT_SECRET: ${{ inputs.terraform_arm_client_secret }}
         ARM_SUBSCRIPTION_ID: ${{ inputs.terraform_arm_subscription_id }}
         ARM_TENANT_ID: ${{ inputs.terraform_arm_tenant_id }}
+        OCTOPUS_VERSION: ${{ env.VERSION }}
       shell: bash
       run: make deploy-${{ inputs.deploy_env }}

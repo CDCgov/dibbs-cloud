@@ -71,6 +71,11 @@ jobs:
         if: ${{ github.actor != 'dependabot[bot]' }}
         with:
           terraform_version: 1.7.4
+      - name: Set variables
+        working-directory: ./octopus
+        run: |
+          VER=$(cat VERSION)
+          echo "VERSION=$VER" >> $GITHUB_ENV  
       - name: Terraform Init Prod
         if: ${{ github.actor != 'dependabot[bot]' }}
         run: make init-prod
@@ -82,4 +87,6 @@ jobs:
         run: make init-global
       - name: Terraform Plan Global
         if: ${{ github.actor != 'dependabot[bot]' }}
+        env:
+          OCTOPUS_VERSION: ${{ env.VERSION }}
         run: make plan-global

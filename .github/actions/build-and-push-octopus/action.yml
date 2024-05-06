@@ -1,6 +1,6 @@
-name: Build Docs Container
-run-name: Build Docs Container by @{{github.actor}}
-description: Build and push Docs container image to the registry
+name: Build and Push Octopus Container
+run-name: Build and Push Octopus Container by @{{github.actor}}
+description: Build and push Octopus container image to the registry
 inputs:
   acr_registry:
     description: Azure Container Registry to push the image to
@@ -24,25 +24,19 @@ runs:
         registry: ${{ inputs.acr_registry }}
         username: ${{ inputs.acr_username }}
 
-
-    - name: Set short git commit SHA
-      shell: bash
-      id: vars
-      run: |
-        calculatedSha=$(git rev-parse --short ${{ github.sha }})
-        echo "COMMIT_SHORT_SHA=$calculatedSha" >> $GITHUB_ENV
- 
-    - name: Confirm git commit SHA output
+    - name: Set variables
+      working-directory: ./octopus
       shell: bash
       run: |
-        echo ${{ env.COMMIT_SHORT_SHA }}   
+        VER=$(cat VERSION)
+        echo "VERSION=$VER" >> $GITHUB_ENV  
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./docs
-        file: ./docs/dockerfile
+        context: ./octopus
+        file: ./octopus/dockerfile
         push: true
         tags: |
-          ${{ inputs.acr_registry }}/dibbs-cloud/docs:${{ env.COMMIT_SHORT_SHA }}
-          ${{ inputs.acr_registry }}/dibbs-cloud/docs:latest
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:${{ env.VERSION }}
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:latest

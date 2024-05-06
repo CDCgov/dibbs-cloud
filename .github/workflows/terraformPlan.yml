@@ -35,7 +35,14 @@ jobs:
       - uses: hashicorp/setup-terraform@v3.1.0
         with:
           terraform_version: 1.7.4
+      - name: Set variables
+        working-directory: ./octopus
+        run: |
+          VER=$(cat VERSION)
+          echo "VERSION=$VER" >> $GITHUB_ENV  
       - name: Terraform Init
         run: make init-${{ github.event.inputs.env }}
       - name: Terraform plan
+        env:
+          OCTOPUS_VERSION: ${{ env.VERSION }}
         run: make plan-${{ github.event.inputs.env }}
