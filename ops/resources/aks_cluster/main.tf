@@ -63,6 +63,23 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       key_data = jsondecode(azapi_resource_action.ssh_public_key_gen.output).publicKey
     }
   }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "helm_release" "octopus_tentacle" {
+  name             = "octopus-tentacle"
+  chart            = "./charts/octopus-tentacle"
+  namespace        = "octopus"
+  create_namespace = true
+  depends_on       = [azurerm_kubernetes_cluster.k8s]
+
+  set {
+    name  = "installCRDs"
+    value = true
+  }
 }
 
 variable "vm_username" {
