@@ -35,8 +35,18 @@ runs:
       uses: docker/build-push-action@v5
       with:
         context: ./octopus
-        file: ./octopus/dockerfile
+        file: ./octopus/dockerfile.server
         push: true
         tags: |
           ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:${{ env.VERSION }}
           ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploy:latest
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: ./octopus
+        file: ./octopus/dockerfile.tentacle
+        push: true
+        tags: |
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploytentacle:${{ env.VERSION }}
+          ${{ inputs.acr_registry }}/dibbs-cloud/octopusdeploytentacle:latest
