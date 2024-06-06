@@ -19,14 +19,14 @@ resource "azurerm_container_app_environment" "ce_apps" {
   log_analytics_workspace_id = azurerm_log_analytics_workspace.aca_analytics.id
 
   infrastructure_resource_group_name = "${local.name}-ce-apps-rg"
-  infrastructure_subnet_id = var.aca_subnet_id
+  infrastructure_subnet_id           = var.aca_subnet_id
 
   //Can create additional profiles for FHIR converter, etc.
   workload_profile {
-    name = "ce-apps-profile"
+    name                  = "ce-apps-profile"
     workload_profile_type = "D4"
-    maximum_count = 10
-    minimum_count = 1
+    maximum_count         = 10
+    minimum_count         = 1
   }
 }
 
@@ -47,13 +47,13 @@ resource "azurerm_container_app" "example" {
 
   ingress {
     allow_insecure_connections = false
-    external_enabled = true
-    target_port = 80
-    transport = "auto"
+    external_enabled           = true
+    target_port                = 80
+    transport                  = "auto"
 
     traffic_weight {
       latest_revision = true
-      percentage = 100
+      percentage      = 100
     }
   }
 
