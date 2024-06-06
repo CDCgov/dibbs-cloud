@@ -44,7 +44,13 @@ variable "app_gateway_subnet_address_prefix" {
 variable "lb_subnet_address_prefix" {
   type        = string
   description = "Load balancer subnet IP address space."
-  default     = "10.30.7.0/24"
+  default     = "10.30.7.0/25"
+}
+
+variable "aca_subnet_address_prefix" {
+  type        = string
+  description = "Load balancer subnet IP address space."
+  default     = "10.30.7.128/25"
 }
 
 variable "app_gateway_sku" {
