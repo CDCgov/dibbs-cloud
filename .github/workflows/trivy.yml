@@ -1,0 +1,36 @@
+# Use this action if we want these alerts to show up in the Github Security Alerts: https://github.com/marketplace/actions/run-tfsec-with-sarif-upload
+# Use this action if we want these alerts to be added as comments on a PR: https://github.com/marketplace/actions/run-tfsec-with-sarif-upload
+# This action repo: https://github.com/aquasecurity/tfsec-action
+name: tfsec
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  trivy:
+    name: trivy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@master
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@0.20.0
+        with:
+          image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
