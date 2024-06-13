@@ -22,7 +22,8 @@ jobs:
         uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: 'fs'
-          scan-ref: './ops/dev/'
+          scan-ref: 'ops/dev/'
+          scanners: 'vuln,secret,config'
           ignore-unfixed: true
           format: 'table'
           severity: 'CRITICAL,HIGH'
