@@ -1,4 +1,4 @@
-
+#Use this action if we want these alerts to show up in the Github Security Alerts https://github.com/aquasecurity/trivy-action?tab=readme-ov-file#inputs
 name: trivy
 
 on:
@@ -22,8 +22,8 @@ jobs:
         uses: aquasecurity/trivy-action@0.20.0
         with:
           scan-type: 'fs'
-          scan-ref: 'ops/dev/'
+          scan-ref: 'ops/'
           scanners: 'vuln,secret,config'
-          ignore-unfixed: true
+          ignore-unfixed: false
           format: 'table'
           severity: 'CRITICAL,HIGH'
