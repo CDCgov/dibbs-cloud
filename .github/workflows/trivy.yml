@@ -25,5 +25,6 @@ jobs:
           scan-ref: 'ops/'
           scanners: 'vuln,secret,config'
           ignore-unfixed: false
+          exit-code: '1'
           format: 'table'
           severity: 'CRITICAL,HIGH'
