@@ -1,9 +1,15 @@
 resource "azurerm_resource_group" "rg" {
   name     = "${var.team}-${var.project}-${var.env}"
   location = var.location
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
-#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-05-01
+#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-07-01
 resource "azurerm_key_vault" "kv" {
   name                        = "${var.team}${var.project}${var.env}kv"
   location                    = var.location

@@ -10,6 +10,10 @@ output "subnet_kube_id" {
   value = azurerm_subnet.kube.id
 }
 
+output "subnet_aca_id" {
+  value = azurerm_subnet.aca.id
+}
+
 output "network" {
   value = azurerm_virtual_network.vnet
 }

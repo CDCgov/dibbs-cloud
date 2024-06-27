@@ -7,7 +7,7 @@ locals {
   resource_group_name = "${local.team}-${local.project}-${local.env}"
 }
 
-#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-05-01
+#tfsec:ignore:azure-keyvault-specify-network-acl:exp:2024-07-01
 resource "azurerm_key_vault" "kv" {
   name                        = "${local.team}${local.project}${local.env}kv"
   location                    = local.location

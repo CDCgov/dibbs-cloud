@@ -38,3 +38,19 @@ resource "azurerm_subnet" "lbs" {
     "Microsoft.Storage"
   ]
 }
+
+resource "azurerm_subnet" "aca" {
+  name                 = "${local.name}-aca"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [var.aca_subnet_address_prefix]
+
+  delegation {
+    name = "aca_delegation"
+
+    service_delegation {
+      name    = "Microsoft.App/environments"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/join/action"]
+    }
+  }
+}
