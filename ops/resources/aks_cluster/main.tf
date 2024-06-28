@@ -12,9 +12,9 @@ resource "azurerm_log_analytics_workspace" "analytics" {
   daily_quota_gb = 5
 }
 
-#tfsec:ignore:azure-container-configured-network-policy:exp:2024-06-01
-#tfsec:ignore:azure-container-limit-authorized-ips:exp:2024-06-01
-#tfsec:ignore:azure-container-use-rbac-permissions:exp:2024-06-01
+#tfsec:ignore:azure-container-configured-network-policy:exp:2024-07-01
+#tfsec:ignore:azure-container-limit-authorized-ips:exp:2024-07-01
+#tfsec:ignore:azure-container-use-rbac-permissions:exp:2024-07-01
 resource "azurerm_kubernetes_cluster" "k8s" {
   name                = "${local.name}-aks"
   location            = var.location

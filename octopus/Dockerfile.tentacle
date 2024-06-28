@@ -1,0 +1,8 @@
+FROM octopusdeploy/tentacle:8.1.1838
+
+ENV ACCEPT_EULA=Y
+ENV ListeningPort=""
+ENV ServerApiKey=""
+ENV TargetEnvironment=""
+ENV TargetRoles=""
+ENV ServerUrl=""
