@@ -1,3 +1,10 @@
+resource "azurerm_subnet" "kube" {
+  name                 = "${local.name}-kube"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = [var.k8s_subnet_address_prefix]
+}
+
 locals {
   backend_address_pool_name      = "${azurerm_virtual_network.vnet.name}-beap"
   frontend_port_name             = "${azurerm_virtual_network.vnet.name}-feport"
@@ -16,7 +23,7 @@ resource "azurerm_application_gateway" "k8s" {
 
   sku {
     name     = var.app_gateway_sku
-    tier     = "Standard_v2"
+    tier     = var.app_gateway_tier
     capacity = 2
   }
 

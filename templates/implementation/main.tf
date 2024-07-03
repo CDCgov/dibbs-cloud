@@ -65,4 +65,6 @@ module "aks" {
 
   aks_subnet_id = module.virtual_network.subnet_kube_id
   agic_id       = module.virtual_network.agic_id
+
+  key_vault_id = module.foundations.key_vault_id
 }
