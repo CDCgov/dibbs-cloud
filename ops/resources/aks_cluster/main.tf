@@ -22,6 +22,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   dns_prefix          = local.name
 
   azure_policy_enabled = true
+#based ths ip off of the aks_service_cidr, this value should Limit the access to the API server to a limited IP range
+    authorized_ip_ranges = [
+      "10.0.0.0/16"
+    ]
+
+  }
 
   microsoft_defender {
     log_analytics_workspace_id = azurerm_log_analytics_workspace.analytics.id
