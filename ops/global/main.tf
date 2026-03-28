@@ -18,6 +18,10 @@ resource "azurerm_key_vault" "kv" {
   purge_protection_enabled    = false
 
   sku_name = "standard"
+  network_acls {
+    bypass = "AzureServices"
+    default_action = "Deny"
+  }
 }
 
 resource "azurerm_container_registry" "acr" {
